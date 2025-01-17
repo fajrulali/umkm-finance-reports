@@ -1,15 +1,30 @@
+<script setup>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head } from '@inertiajs/vue3';
+</script>
+
 <template>
-    <div class="flex">
-        <!-- Sidebar -->
-        <div class="w-1/4 bg-gray-100 h-screen p-4">
-            <ul>
-                <li><router-link to="/">Login</router-link></li>
-                <li><router-link to="/dashboard">Dashboard</router-link></li>
-            </ul>
+    <Head title="Dashboard" />
+
+    <AuthenticatedLayout>
+        <template #header>
+            <h2
+                class="text-xl font-semibold leading-tight text-gray-800"
+            >
+                Dashboard
+            </h2>
+        </template>
+
+        <div class="py-12">
+            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div
+                    class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
+                >
+                    <div class="p-6 text-gray-900">
+                        You're logged in!
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Content -->
-        <div class="w-3/4 p-8">
-            <router-view></router-view>
-        </div>
-    </div>
+    </AuthenticatedLayout>
 </template>
