@@ -1,5 +1,3 @@
-<!-- resources/views/welcome.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +7,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <!-- Tempat Vue akan di-mount -->
+    {{-- Tempat Vue akan di-mount --}}
     <div id="app"></div>
 
-    <!-- JavaScript sudah di-import menggunakan @vite -->
+    {{-- JavaScript sudah di-import menggunakan @vite --}}
 </body>
 </html>
