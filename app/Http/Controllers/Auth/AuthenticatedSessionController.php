@@ -33,7 +33,17 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return redirect()->intended(route('admin.dashboard')); // Redirect ke route admin.dashboard
+        } elseif ($user->role === 'tenant') {
+            return redirect()->intended(route('tenant.dashboard')); // Redirect ke route tenant.dashboard
+        }
+
+        abort(403, 'Unauthorized. Role tidak terdefinisi.'); // Atau redirect ke halaman error
+
+        //return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**

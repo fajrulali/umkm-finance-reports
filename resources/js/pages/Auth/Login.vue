@@ -32,23 +32,30 @@ const submit = () => {
 
 <script>
     export default {
-        methods: {
-            async login() {
-                try {
-                    await this.$inertia.post('/login', this.form);
-
-                    // Redirect ke dashboard sesuai role
-                    const user = usePage().props.auth.user;
-                    if (user.role === 'admin') {
-                        this.$inertia.visit('/dashboard');
-                    } else if (user.role === 'tenant') {
-                        this.$inertia.visit('/dashboard');
-                    }
-                } catch (error) {
-                    console.error(error);
-                }
+        data() {
+        return {
+            form: {
+                email: '',
+                password: '',
             },
+            errors: {},
+        };
+    },
+    methods: {
+        async login() {
+            this.errors = {};
+            try {
+                await this.$inertia.post('/login', this.form, {
+                    onError: (errors) => {
+                        this.errors = errors;
+                    },
+                });
+            } catch (error) {
+                console.error("Kesalahan jaringan:", error);
+                this.errors.general = "Terjadi kesalahan jaringan. Coba lagi nanti.";
+            }
         },
+    },
 };
 </script>
 
